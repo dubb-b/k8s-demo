@@ -1,0 +1,35 @@
+# Create a deployment
+kubectl apply -f ./deployment.yaml
+
+#Update Deployment to updated version
+kubectl --record deployment.apps/nginx-deployment set image deployment.v1.apps/nginx-deployment nginx=nginx:latest
+
+#How to find objects
+kubectl get <object>
+
+# Describe Pod
+kubectl get pods
+
+# Describe Deployment
+kubectl get deployment
+
+# Login to Pod
+kubectl exec -it <pod>
+
+# port forward to view without ingress
+kubectl port-forward pod/<pod name> 8000:80
+
+# get deployment
+kubectl get deployment
+
+# scale deployment
+kubectl scale --current-replicas=3 --replicas=3 deployment/nginx-deployment
+
+# rollback deployment with error
+kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:17.9 --record=true
+
+# scale back down
+kubectl scale --current-replicas=8 --replicas=3 deployment/nginx-deployment
+
+# delete deployment
+kubectl delete -f ./deployment.yaml
