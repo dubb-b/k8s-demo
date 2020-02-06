@@ -1,17 +1,32 @@
+#Show kubernetes info
+kubectl cluster-info
+
+#Get nodes
+kubectl get nodes
+
 # Create a deployment
 kubectl apply -f ./deployment.yaml
 
 #Update Deployment to updated version
 kubectl --record deployment.apps/nginx-deployment set image deployment.v1.apps/nginx-deployment nginx=nginx:latest
 
-#How to find objects
-kubectl get <object>
+#How to find all objects
+kubectl get all --all-namespaces
 
 # Describe Pod
 kubectl get pods
 
+# Describe Pod
+kubectl describe pod <pod name>
+
+# get deployment
+kubectl get deployment -n default
+
 # Describe Deployment
-kubectl get deployment
+kubectl describe deployment <deployment name>
+
+# get logs of a pod
+kubectl logs <pod name>
 
 # Login to Pod
 kubectl exec -it <pod>
@@ -22,11 +37,11 @@ kubectl port-forward pod/<pod name> 8000:80
 # get deployment
 kubectl get deployment
 
-# scale deployment
-kubectl scale --current-replicas=3 --replicas=3 deployment/nginx-deployment
-
 # rollback deployment with error
 kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:17.9 --record=true
+
+# scale deployment
+kubectl scale --current-replicas=3 --replicas=8 deployment/nginx-deployment
 
 # scale back down
 kubectl scale --current-replicas=8 --replicas=3 deployment/nginx-deployment
