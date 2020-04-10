@@ -4,20 +4,20 @@ kubectl cluster-info
 #Get nodes
 kubectl get nodes
 
+#See what all is running
+kubectl get all --all-namespaces
+
 # Create a deployment
 kubectl apply -f ./deployment.yaml
+
+# Describe Pod
+kubectl describe pod <pod name>
 
 #Update Deployment to updated version
 kubectl --record deployment.apps/nginx-deployment set image deployment.v1.apps/nginx-deployment nginx=nginx:latest
 
-#How to find all objects
-kubectl get all --all-namespaces
-
-# Describe Pod
-kubectl get pods
-
-# Describe Pod
-kubectl describe pod <pod name>
+#Get pods for a namespace
+kubectl get pod -n <namespace>
 
 # get deployment
 kubectl get deployment -n default
